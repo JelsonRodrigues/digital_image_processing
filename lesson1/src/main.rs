@@ -2,7 +2,6 @@ use clap::Parser;
 
 #[derive(Debug, Parser)]
 struct Args {
-    // Input image to apply filter
     #[clap(short, long)]
     input_image: String,
 }
