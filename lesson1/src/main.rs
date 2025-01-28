@@ -16,16 +16,16 @@ fn main() {
 
     let mut img = ImageReader::open(args.img).unwrap().decode().unwrap();
 
+    let threshold = 64;
+
     img.as_mut_rgba8()
         .unwrap()
-        .pixels_mut()
-        .into_iter()
-        .for_each(|pixel| {
-            pixel[0] = u8::MAX - pixel[0];
-            pixel[1] = u8::MAX - pixel[1];
-            pixel[2] = u8::MAX - pixel[2];
+        .enumerate_pixels_mut()
+        .for_each(|(x, y, pixel)| {
+            pixel[0] = if pixel[0] < threshold { 0 } else { u8::MAX };
+            pixel[1] = if pixel[1] < threshold { 0 } else { u8::MAX };
+            pixel[2] = if pixel[2] < threshold { 0 } else { u8::MAX };
         });
 
-    // save inverted image
-    img.save("inverted.png").unwrap();
+    img.save("bin.png").unwrap();
 }

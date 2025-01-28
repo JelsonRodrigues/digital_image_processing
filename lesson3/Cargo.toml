@@ -1,0 +1,9 @@
+[package]
+name = "lesson3"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+image = { version = "0.25.5" }
+convolve2d = { version = "0.2.0", features = ["image"] }
+clap = {version = "4.5.27", features=["derive"]}
